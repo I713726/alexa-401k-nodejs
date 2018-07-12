@@ -1,14 +1,12 @@
 'use strict';
-let express = require('express'), bodyParser =
-require('body-parser'), voya401k = require('./voya401k');
+let express = require('express'), bodyParser = require('body-parser'), voya401k = require('./voya401k');
 let app = express();
 app.set('port', process.env.PORT || 3000);
 app.use(express.static('public'));
 app.use(bodyParser.json({
     verify: function
 getRawBody(req, res, buf) {
-        req.rawBody =
-buf.toString();
+        req.rawBody = buf.toString();
     }
 }));
 app.get('/', function(req, res) {
