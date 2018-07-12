@@ -19,8 +19,7 @@ message: 'The forecaster is up and running.', since: (new Date()).toString()
 app.post('/forecast', verify, function(req, res) {
 // We'll fill this
 out later!
-console.log('Forecaster
-is up and running on port %d', req.body.request.type);
+console.log('Forecaster is up and running on port %d', req.body.request.type);
     res.json({
                                            response:
 {
