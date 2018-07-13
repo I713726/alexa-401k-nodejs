@@ -2,7 +2,7 @@
   "name": "alexa-Voya401k",
   "version": "1.0.0",
   "description": "VOYA 401K",
-  "main": "app/app.js",
+  "start": "app/app.js",
   "engines": {
     "node": "6.2.1"
   },
