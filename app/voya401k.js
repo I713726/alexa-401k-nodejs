@@ -20,7 +20,7 @@ module.exports = function(req, res) {
                 false
             )
         );
-
+    }
 	else if (req.body.request.type === 'IntentRequest' ) {
 		
 		if (req.body.request.intent.name === 'VoyaPINIntent') {
