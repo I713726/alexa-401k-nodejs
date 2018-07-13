@@ -7,7 +7,7 @@
     "start" : "node app/app.js"
   },
   "engines": {
-    "node": "4.0.0"
+    "node": "6.2.1"
   },
   "author": "Srini Kunkalaguntla",
   "license": "MIT",
