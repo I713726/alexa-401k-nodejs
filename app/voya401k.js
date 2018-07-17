@@ -83,7 +83,7 @@ module.exports = function(req, res) {
         if(question === '2') {
           res.json(
               buildResponse(
-                {questionNo: 3, voyaPin: dataRow.No},
+                {questionNo: '3', voyaPin: dataRow.No},
                 '<speak>Ok, I understand. Would you want to save more in the future? '
                 +'I can sign you up to save 1% more a year from now?</speak>',
                 {},
@@ -100,11 +100,11 @@ module.exports = function(req, res) {
             buildResponse(
               //maybe we should calculate these values instead of pulling them
               //from the spreadsheet
-              {questionNo: 2, voyaPin : dataRow.No},
-              '<speak>You are doing a great job of saving'
+              {questionNo: '2', voyaPin : dataRow.No},
+              '<speak>You are doing a great job of saving '
                + dataRow.CurrentSaving + ' from your pay.' +
                ' if you increase your savings rate to' + dataRow.IncreaseSaving +
-               ' you could retire at age' + dataRow.ActualAge + '. Would you like to'
+               ' you could retire at age ' + dataRow.ActualAge + '. Would you like to'
                +' increase your savings rate by '+ dataRow.SavingsRate + ' now?'
                + '</speak>',
               {},
@@ -117,7 +117,7 @@ module.exports = function(req, res) {
             buildResponse(
               //maybe we should calculate these values instead of pulling them
               //from the spreadsheet
-              {questionNo: 0, voyaPin : dataRow.No},
+              {voyaPin : dataRow.No},
               '<speak>OK, great. I\'ve done that for you. Congratulations,' +
               ' your future self will thank you!</speak>',
               {},
