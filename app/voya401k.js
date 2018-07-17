@@ -23,11 +23,6 @@ module.exports = function(req, res) {
     }
 
     if (req.body.request.intent.name === 'VoyaPINIntent') {
-		//	var dataRow = readData(req.body.request.intent.slots.pin.value);
-			if (dataRow) {
-				var greet = "";
-				var currentTime = new Date();
-				var hrs = currentTime.getHours();
 				res.json(
 					buildResponse(
 					  {},
@@ -37,8 +32,7 @@ module.exports = function(req, res) {
 						false
 					)
 				);
-			}
-		}
+  }
 	if (req.body.request.type === 'IntentRequest' ) {
 /*
 		if (req.body.request.intent.name === 'VoyaPINIntent') {
