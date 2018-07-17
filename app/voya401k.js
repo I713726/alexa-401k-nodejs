@@ -64,7 +64,7 @@ module.exports = function(req, res) {
           );
       }
 		}
-    else if (req.body.session.pin === null) {
+    else if (!req.body.session.pin) {
       res.json(
         buildResponse(
           { questionNo: '1'},
