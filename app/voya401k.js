@@ -70,7 +70,7 @@ module.exports = function(req, res) {
 			} else if (req.body.request.intent.name === 'VoyaNoIntent') {
         var dataRow = readData(req.body.session.attributes.voyaPin);
         var question = req.body.session.attributes.questionNo;
-        if(question === 1) {
+        if(question === '1') {
           res.json(
               buildResponse(
                 {},
@@ -80,7 +80,7 @@ module.exports = function(req, res) {
                 true )
               );
         }
-        if(question === 2) {
+        if(question === '2') {
           res.json(
               buildResponse(
                 {questionNo: 3, voyaPin: dataRow.No},
@@ -95,7 +95,7 @@ module.exports = function(req, res) {
 			} else if (req.body.request.intent.name === 'VoyaYesIntent') {
         var dataRow = readData(req.body.session.attributes.voyaPin);
         var question = req.body.session.attributes.questionNo;
-        if(question === 1) {
+        if(question === '1') {
           res.json(
             buildResponse(
               //maybe we should calculate these values instead of pulling them
@@ -112,7 +112,7 @@ module.exports = function(req, res) {
               false)
           );
         }
-        if(question === 2 || question === 3) {
+        if(question === '2' || question === '3') {
           res.json(
             buildResponse(
               //maybe we should calculate these values instead of pulling them
