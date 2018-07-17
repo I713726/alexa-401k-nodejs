@@ -103,7 +103,6 @@ module.exports = function(req, res) {
 					)
 				);
         //this else seems to have no point
-        /**
 			} else {
 				res.json(
 					buildResponse(
@@ -131,7 +130,6 @@ module.exports = function(req, res) {
         console.error('Intent not implemented: ', req.body);
         res.status(504).json({ message: 'Intent Not Implemented' });
     }
-*/
 }
 
 function readData(id) {
