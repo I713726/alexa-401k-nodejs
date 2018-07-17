@@ -80,9 +80,9 @@ module.exports = function(req, res) {
 
 			} else if (req.body.request.intent.name === 'VoyaYesIntent') {
         var dataRow = readData(req.body.session.attributes.voyaPin);
-        var questionNo = req.body.session.attributes.questionNo;
+        var question = req.body.session.attributes.questionNo;
         buildResponse(
-          {},
+          {questionNo: question, voyaPin : dataRow.No},
           '<speak>Something about how you should save more, ' + dataRow.FirstName + '</speak>',
           {},
           '',
