@@ -63,17 +63,17 @@ module.exports = function(req, res) {
             false )
           );
       }
-		}/*
-    else if (!req.body.session.hasOwnProperty('voyaPin')) {
+		}
+    else if (!req.body.session.attributes.hasOwnProperty('voyaPin')) {
       res.json(
         buildResponse(
-          { questionNo: '1'},
+          {},
           '<speak>Sorry, that\'s not a valid pin</speak>',
           {},
           '',
           false )
         );
-    }*/
+    }
     else if ( req.body.request.intent.name === 'VoyaHowMyAccountIntent' ) {
 			var dataRow = readData(req.body.session.attributes.voyaPin);
 				var value = new Date();
