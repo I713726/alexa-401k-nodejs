@@ -54,7 +54,7 @@ module.exports = function(req, res) {
 				);
 			}
 		}
-    else */if ( req.body.session.attributes ) {
+    else */if ( req.body.request.intent.name === 'VoyaHowMyAccountIntent' ) {
 			var dataRow = readData(req.body.session.attributes.voyaPin);
 				var value = new Date();
 				var dateVal =  value.getMonth()+1 + "/" + value.getDate() + "/" + value.getFullYear();
