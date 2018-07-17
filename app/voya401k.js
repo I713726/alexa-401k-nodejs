@@ -53,7 +53,27 @@ module.exports = function(req, res) {
 					)
 				);
 			}
+      else {
+        res.json(
+          buildResponse(
+            { questionNo: '1'},
+            '<speak>Sorry, that\'s not a valid pin</speak>',
+            {},
+            '',
+            false )
+          );
+      }
 		}
+    else if (req.body.session.pin === null) {
+      res.json(
+        buildResponse(
+          { questionNo: '1'},
+          '<speak>Sorry, that\'s not a valid pin</speak>',
+          {},
+          '',
+          false )
+        );
+    }
     else if ( req.body.request.intent.name === 'VoyaHowMyAccountIntent' ) {
 			var dataRow = readData(req.body.session.attributes.voyaPin);
 				var value = new Date();
@@ -80,7 +100,7 @@ module.exports = function(req, res) {
                 true )
               );
         }
-        if(question === '2') {
+        else if(question === '2') {
           res.json(
               buildResponse(
                 {questionNo: '3', voyaPin: dataRow.No},
@@ -91,7 +111,16 @@ module.exports = function(req, res) {
                 false )
               );
         }
-
+        else {
+          res.json(
+              buildResponse(
+                {},
+                '<speak>Ok '+dataRow.FirstName+'!, I understand thank you for using Voya 401k service, have a nice day!</speak>',
+                {},
+                '',
+                true )
+              );
+        }
 			} else if (req.body.request.intent.name === 'VoyaYesIntent') {
         var dataRow = readData(req.body.session.attributes.voyaPin);
         var question = req.body.session.attributes.questionNo;
@@ -112,7 +141,7 @@ module.exports = function(req, res) {
               false)
           );
         }
-        if(question === '2' || question === '3') {
+        else if(question === '2' || question === '3') {
           res.json(
             buildResponse(
               //maybe we should calculate these values instead of pulling them
@@ -125,7 +154,6 @@ module.exports = function(req, res) {
               true)
           );
         }
-
       } else if (req.body.request.type === 'HelpIntent') {
 				res.json(
 					buildResponse(
