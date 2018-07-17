@@ -24,9 +24,11 @@ module.exports = function(req, res) {
 
     if (req.body.request.intent.name === 'VoyaPINIntent') {
       var dataRow = readData('1111');
+      console.log(dataRow.FirstName);
 				res.json(
 					buildResponse(
 					  {},
+            //the app breaks down when you attempt to use dataRow.FirstName in the response
 						'<speak>Hi !! how can I help you with your monies today</speak>',
 						{},
 						'<speak>You can say, things like tell me how my account is doing? </speak>',
