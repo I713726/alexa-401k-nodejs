@@ -23,10 +23,10 @@ module.exports = function(req, res) {
     }
 
     if (req.body.request.intent.name === 'VoyaPINIntent') {
-      var dataRow = readData('1111');
+      var dataRow = readData(req.body.request.intent.slots.pin.value);
 				res.json(
 					buildResponse(
-					  {},
+					  {voyaPin : dataRow.No},
             //the app breaks down when you attempt to use dataRow.FirstName in the response
 						'<speak>Hi' + dataRow.FirstName + '!! how can I help you with your monies today</speak>',
 						{},
