@@ -102,7 +102,9 @@ module.exports = function(req, res) {
 						true
 					)
 				);
+      }
         //this else seems to have no point
+        /*
 			} else {
 				res.json(
 					buildResponse(
@@ -124,7 +126,7 @@ module.exports = function(req, res) {
 					false
 				)
 			);
-		}
+		} */
 /*     else {
         console.error('Intent not implemented: ', req.body);
         res.status(504).json({ message: 'Intent Not Implemented' });
