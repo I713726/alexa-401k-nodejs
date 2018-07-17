@@ -10,7 +10,7 @@ module.exports = function(req, res) {
     console.log('New request for the Voya 401k:\n', req.body);
 
     if (req.body.request.type === 'LaunchRequest') {
-		
+
 		res.json(
             buildResponse(
                 {},
@@ -20,9 +20,9 @@ module.exports = function(req, res) {
                 false
             )
         );
-    
+
 	if (req.body.request.type === 'IntentRequest' ) {
-		
+
 		if (req.body.request.intent.name === 'VoyaPINIntent') {
 			var dataRow = readData(req.body.request.intent.slots.pin.value);
 			if (dataRow) {
@@ -38,30 +38,30 @@ module.exports = function(req, res) {
 						false
 					)
 				);
-			} 
+			}
 		} else if ( req.body.session.attributes ) {
 			var dataRow = readData(req.body.session.attributes.voayPin);
 				var value = new Date();
 				var dateVal =  value.getMonth()+1 + "/" + value.getDate() + "/" + value.getFullYear();
-				res.json( 
-					buildResponse( 
-						{ questionNo: '1', voayPin : dataRow.No }, 
-						'<speak>Sure '+dataRow.FirstName+', As of '+dateVal+', your account balance is '+dataRow.Accountbalance+'. Your rate of return for the past 12 months is '+dataRow.PersonalRateofReturn+', which is above the average portfolio benchmark for this period. Nice job making your money work for you! It looks like you are currently projected to have enough money to retire at age '+dataRow.ActualAge+'. Would you like to hear suggestions to be able retire a little sooner?</speak>', 
-						{}, 
+				res.json(
+					buildResponse(
+						{ questionNo: '1', voayPin : dataRow.No },
+						'<speak>Sure '+dataRow.FirstName+', As of '+dateVal+', your account balance is '+dataRow.Accountbalance+'. Your rate of return for the past 12 months is '+dataRow.PersonalRateofReturn+', which is above the average portfolio benchmark for this period. Nice job making your money work for you! It looks like you are currently projected to have enough money to retire at age '+dataRow.ActualAge+'. Would you like to hear suggestions to be able retire a little sooner?</speak>',
+						{},
 						'<speak>Would you like to hear suggestions to be able retire a little sooner?</speak>',
 						false )
 					);
-			
+
 			} else if (req.body.request.intent.name === 'VoyaNoIntent') {
-				res.json( 
-						buildResponse( 
-							{}, 
-							'<speak>Ok '+dataRow.FirstName+'!, I understand thank you for using Voya 401k service, have a nice day!</speak>', 
-							{}, 
+				res.json(
+						buildResponse(
+							{},
+							'<speak>Ok '+dataRow.FirstName+'!, I understand thank you for using Voya 401k service, have a nice day!</speak>',
+							{},
 							'',
 							true )
 						);
-				
+
 			} else if (req.body.request.type === 'HelpIntent') {
 				res.json(
 					buildResponse(
@@ -85,11 +85,11 @@ module.exports = function(req, res) {
 				);
 
 			} else {
-				res.json( 
-					buildResponse( 
-						{}, 
-						'<speak>Ok, thank you for using Voya 401k service, have a nice day!</speak>', 
-						{}, 
+				res.json(
+					buildResponse(
+						{},
+						'<speak>Ok, thank you for using Voya 401k service, have a nice day!</speak>',
+						{},
 						'',
 						true )
 				);
@@ -119,15 +119,15 @@ function readData(id) {
 	var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
 	//console.log(xlData);
 	var outData;
-	xlData.forEach(function(row) { 
+	xlData.forEach(function(row) {
 		//console.log(row.No);
 		if (id == row.No) {
 			//console.log('inside loop:', row.No);
 		}
 	});
-	
+
 	return outData;
-    
+
 }
 
 function buildResponse(session, speech, card, reprompt, end) {
