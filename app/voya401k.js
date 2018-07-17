@@ -64,7 +64,7 @@ module.exports = function(req, res) {
           );
       }
 		}
-    else if (!req.body.session.hasOwnProperty(pin)) {
+    else if (!req.body.session.hasOwnProperty('pin')) {
       res.json(
         buildResponse(
           { questionNo: '1'},
