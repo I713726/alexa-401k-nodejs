@@ -103,6 +103,8 @@ module.exports = function(req, res) {
 					)
 				);
       }
+    }
+  }
         //this else seems to have no point
         /*
 			} else {
