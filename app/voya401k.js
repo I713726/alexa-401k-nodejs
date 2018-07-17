@@ -68,6 +68,7 @@ module.exports = function(req, res) {
 					);
 
 			} else if (req.body.request.intent.name === 'VoyaNoIntent') {
+        var dataRow = readData(req.body.session.attributes.voyaPin);
 				res.json(
 						buildResponse(
 							{},
@@ -77,7 +78,17 @@ module.exports = function(req, res) {
 							true )
 						);
 
-			} else if (req.body.request.type === 'HelpIntent') {
+			} else if (req.body.request.intent.name === 'VoyaYesIntent') {
+        var dataRow = readData(req.body.session.attributes.voyaPin);
+        var questionNo = req.body.session.attributes.questionNo;
+        buildResponse(
+          {},
+          '<speak>Something about how you should save more, ' + dataRow.FirstName + '</speak>',
+          {},
+          '',
+          false
+        );
+      } else if (req.body.request.type === 'HelpIntent') {
 				res.json(
 					buildResponse(
 						{},
