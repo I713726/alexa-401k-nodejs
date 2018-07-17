@@ -27,7 +27,7 @@ module.exports = function(req, res) {
 				res.json(
 					buildResponse(
 					  {},
-						'<speak>Hi !!' 'how can I help you with your monies today</speak>',
+						'<speak>Hi !!' + 'how can I help you with your monies today</speak>',
 						{},
 						'<speak>You can say, things like tell me how my account is doing? </speak>',
 						false
