@@ -63,7 +63,7 @@ module.exports = function(req, res) {
             false )
           );
       }
-		}
+		}/*
     else if (!req.body.session.hasOwnProperty('voyaPin')) {
       res.json(
         buildResponse(
@@ -73,7 +73,7 @@ module.exports = function(req, res) {
           '',
           false )
         );
-    }
+    }*/
     else if ( req.body.request.intent.name === 'VoyaHowMyAccountIntent' ) {
 			var dataRow = readData(req.body.session.attributes.voyaPin);
 				var value = new Date();
