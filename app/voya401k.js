@@ -23,22 +23,17 @@ module.exports = function(req, res) {
     }
 
     if (req.body.request.intent.name === 'VoyaPINIntent') {
-			var dataRow = readData(req.body.request.intent.slots.pin.value);
-			if (dataRow) {
-				var greet = "";
-				var currentTime = new Date();
-				var hrs = currentTime.getHours();
 				res.json(
 					buildResponse(
-						{voyaPin : dataRow.No},
-						'<speak>Hi '+dataRow.FirstName+', '+greet+'!! how can I help you with your ' +dataRow.PlanName+ ' today</speak>',
+					  {},
+						'<speak>Hi !! how can I help you with your monies today</speak>',
 						{},
 						'<speak>You can say, things like tell me how my account is doing? </speak>',
 						false
 					)
 				);
 			}
-		} 
+		}
 	if (req.body.request.type === 'IntentRequest' ) {
 /*
 		if (req.body.request.intent.name === 'VoyaPINIntent') {
@@ -102,7 +97,7 @@ module.exports = function(req, res) {
 						true
 					)
 				);
-
+        //this else seems to have no point
 			} else {
 				res.json(
 					buildResponse(
