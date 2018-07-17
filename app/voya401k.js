@@ -21,7 +21,7 @@ module.exports = function(req, res) {
             )
         );
     }
-
+/*
     if (req.body.request.intent.name === 'VoyaPINIntent') {
       var dataRow = readData(req.body.request.intent.slots.pin.value);
 				res.json(
@@ -34,9 +34,9 @@ module.exports = function(req, res) {
 						false
 					)
 				);
-  }
+  }*/
 	if (req.body.request.type === 'IntentRequest' ) {
-/*
+
 		if (req.body.request.intent.name === 'VoyaPINIntent') {
 			var dataRow = readData(req.body.request.intent.slots.pin.value);
 			if (dataRow) {
@@ -54,7 +54,7 @@ module.exports = function(req, res) {
 				);
 			}
 		}
-    else */if ( req.body.request.intent.name === 'VoyaHowMyAccountIntent' ) {
+    else if ( req.body.request.intent.name === 'VoyaHowMyAccountIntent' ) {
 			var dataRow = readData(req.body.session.attributes.voyaPin);
 				var value = new Date();
 				var dateVal =  value.getMonth()+1 + "/" + value.getDate() + "/" + value.getFullYear();
