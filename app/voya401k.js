@@ -23,7 +23,7 @@ module.exports = function(req, res) {
     }
 
     if (req.body.request.intent.name === 'VoyaPINIntent') {
-			var dataRow = readData(req.body.request.intent.slots.pin.value);
+		//	var dataRow = readData(req.body.request.intent.slots.pin.value);
 			if (dataRow) {
 				var greet = "";
 				var currentTime = new Date();
@@ -135,6 +135,7 @@ module.exports = function(req, res) {
     }
 }
 */
+/*
 function readData(id) {
 	//console.log('id: ', id);
 	var workbook = XLSX.readFile('./Master.xlsx');
@@ -152,7 +153,7 @@ function readData(id) {
 	return outData;
 
 }
-
+*/
 function buildResponse(session, speech, card, reprompt, end) {
     return {
         version: VERSION,
