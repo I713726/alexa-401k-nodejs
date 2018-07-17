@@ -161,7 +161,7 @@ module.exports = function(req, res) {
             '<speak>I\'m sorry?</speak>',
             {},
             '',
-            true)
+            false)
         );
         }
       } else if (req.body.request.type === 'HelpIntent') {
