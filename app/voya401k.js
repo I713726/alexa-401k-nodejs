@@ -154,6 +154,17 @@ module.exports = function(req, res) {
               true)
           );
         }
+        else {
+          buildResponse(
+            //maybe we should calculate these values instead of pulling them
+            //from the spreadsheet
+            {questionNo: question, voyaPin : dataRow.No},
+            '<speak>I\'m sorry?</speak>',
+            {},
+            '',
+            true)
+        );
+        }
       } else if (req.body.request.type === 'HelpIntent') {
 				res.json(
 					buildResponse(
