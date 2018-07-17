@@ -155,9 +155,8 @@ module.exports = function(req, res) {
           );
         }
         else {
+          res.json(
           buildResponse(
-            //maybe we should calculate these values instead of pulling them
-            //from the spreadsheet
             {questionNo: question, voyaPin : dataRow.No},
             '<speak>I\'m sorry?</speak>',
             {},
