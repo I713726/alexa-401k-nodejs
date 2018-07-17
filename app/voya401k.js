@@ -22,8 +22,25 @@ module.exports = function(req, res) {
         );
     }
 
+    if (req.body.request.intent.name === 'VoyaPINIntent') {
+			var dataRow = readData(req.body.request.intent.slots.pin.value);
+			if (dataRow) {
+				var greet = "";
+				var currentTime = new Date();
+				var hrs = currentTime.getHours();
+				res.json(
+					buildResponse(
+						{voyaPin : dataRow.No},
+						'<speak>Hi '+dataRow.FirstName+', '+greet+'!! how can I help you with your ' +dataRow.PlanName+ ' today</speak>',
+						{},
+						'<speak>You can say, things like tell me how my account is doing? </speak>',
+						false
+					)
+				);
+			}
+		} 
 	if (req.body.request.type === 'IntentRequest' ) {
-
+/*
 		if (req.body.request.intent.name === 'VoyaPINIntent') {
 			var dataRow = readData(req.body.request.intent.slots.pin.value);
 			if (dataRow) {
@@ -40,7 +57,8 @@ module.exports = function(req, res) {
 					)
 				);
 			}
-		} else if ( req.body.session.attributes ) {
+		}
+    else */if ( req.body.session.attributes ) {
 			var dataRow = readData(req.body.session.attributes.voyaPin);
 				var value = new Date();
 				var dateVal =  value.getMonth()+1 + "/" + value.getDate() + "/" + value.getFullYear();
