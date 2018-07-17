@@ -69,26 +69,63 @@ module.exports = function(req, res) {
 
 			} else if (req.body.request.intent.name === 'VoyaNoIntent') {
         var dataRow = readData(req.body.session.attributes.voyaPin);
-				res.json(
-						buildResponse(
-							{},
-							'<speak>Ok '+dataRow.FirstName+'!, I understand thank you for using Voya 401k service, have a nice day!</speak>',
-							{},
-							'',
-							true )
-						);
+        var question = req.body.session.attributes.questionNo;
+        if(question === 1) {
+          res.json(
+              buildResponse(
+                {},
+                '<speak>Ok '+dataRow.FirstName+'!, I understand thank you for using Voya 401k service, have a nice day!</speak>',
+                {},
+                '',
+                true )
+              );
+        }
+        if(question === 2) {
+          res.json(
+              buildResponse(
+                {questionNo: 3, voyaPin: dataRow.No},
+                '<speak>Ok, I understand. Would you want to save more in the future? '
+                +'I can sign you up to save 1% more a year from now?</speak>',
+                {},
+                '',
+                false )
+              );
+        }
 
 			} else if (req.body.request.intent.name === 'VoyaYesIntent') {
         var dataRow = readData(req.body.session.attributes.voyaPin);
         var question = req.body.session.attributes.questionNo;
-        res.json(
-          buildResponse(
-            {questionNo: question, voyaPin : dataRow.No},
-            '<speak>Something about how you should save more, ' + dataRow.FirstName + '</speak>',
-            {},
-            '',
-            false)
-        );
+        if(question === 1) {
+          res.json(
+            buildResponse(
+              //maybe we should calculate these values instead of pulling them
+              //from the spreadsheet
+              {questionNo: 2, voyaPin : dataRow.No},
+              '<speak>You are doing a great job of saving'
+               + dataRow.CurrentSaving + ' from your pay.' +
+               ' if you increase your savings rate to' + dataRow.IncreaseSaving +
+               ' you could retire at age' + ActualAge + '. Would you like to'
+               +' increase your savings rate by '+ dataRow.SavingsRate + ' now?'
+               + '</speak>',
+              {},
+              '',
+              false)
+          );
+        }
+        if(question === 2 || question === 3) {
+          res.json(
+            buildResponse(
+              //maybe we should calculate these values instead of pulling them
+              //from the spreadsheet
+              {questionNo: 0, voyaPin : dataRow.No},
+              '<speak>OK, great. I\'ve done that for you. Congratulations,' +
+              ' your future self will thank you!</speak>',
+              {},
+              '',
+              true)
+          );
+        }
+
       } else if (req.body.request.type === 'HelpIntent') {
 				res.json(
 					buildResponse(
