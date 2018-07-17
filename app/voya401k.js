@@ -32,7 +32,7 @@ module.exports = function(req, res) {
 				var hrs = currentTime.getHours();
 				res.json(
 					buildResponse(
-						{voayPin : dataRow.No},
+						{voyaPin : dataRow.No},
 						'<speak>Hi '+dataRow.FirstName+', '+greet+'!! how can I help you with your ' +dataRow.PlanName+ ' today</speak>',
 						{},
 						'<speak>You can say, things like tell me how my account is doing? </speak>',
@@ -41,12 +41,12 @@ module.exports = function(req, res) {
 				);
 			}
 		} else if ( req.body.session.attributes ) {
-			var dataRow = readData(req.body.session.attributes.voayPin);
+			var dataRow = readData(req.body.session.attributes.voyaPin);
 				var value = new Date();
 				var dateVal =  value.getMonth()+1 + "/" + value.getDate() + "/" + value.getFullYear();
 				res.json(
 					buildResponse(
-						{ questionNo: '1', voayPin : dataRow.No },
+						{ questionNo: '1', voyaPin : dataRow.No },
 						'<speak>Sure '+dataRow.FirstName+', As of '+dateVal+', your account balance is '+dataRow.Accountbalance+'. Your rate of return for the past 12 months is '+dataRow.PersonalRateofReturn+', which is above the average portfolio benchmark for this period. Nice job making your money work for you! It looks like you are currently projected to have enough money to retire at age '+dataRow.ActualAge+'. Would you like to hear suggestions to be able retire a little sooner?</speak>',
 						{},
 						'<speak>Would you like to hear suggestions to be able retire a little sooner?</speak>',
@@ -96,8 +96,7 @@ module.exports = function(req, res) {
 				);
 			}
 		}
-
-    /*else {
+    else {
 			res.json(
 				buildResponse(
 					{},
