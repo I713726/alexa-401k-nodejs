@@ -107,7 +107,9 @@ module.exports = function(req, res) {
 				)
 			);
 		}
-    } else {
+    }
+
+/*      else {
         console.error('Intent not implemented: ', req.body);
         res.status(504).json({ message: 'Intent Not Implemented' });
     }
