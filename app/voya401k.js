@@ -104,7 +104,7 @@ module.exports = function(req, res) {
               '<speak>You are doing a great job of saving'
                + dataRow.CurrentSaving + ' from your pay.' +
                ' if you increase your savings rate to' + dataRow.IncreaseSaving +
-               ' you could retire at age' + ActualAge + '. Would you like to'
+               ' you could retire at age' + dataRow.ActualAge + '. Would you like to'
                +' increase your savings rate by '+ dataRow.SavingsRate + ' now?'
                + '</speak>',
               {},
