@@ -23,10 +23,11 @@ module.exports = function(req, res) {
     }
 
     if (req.body.request.intent.name === 'VoyaPINIntent') {
+      var dataRow = readData(1111);
 				res.json(
 					buildResponse(
 					  {},
-						'<speak>Hi !! how can I help you with your monies today</speak>',
+						'<speak>Hi !!' + dataRow.FirstName +'how can I help you with your monies today</speak>',
 						{},
 						'<speak>You can say, things like tell me how my account is doing? </speak>',
 						false
@@ -129,7 +130,7 @@ module.exports = function(req, res) {
     }
 }
 */
-/*
+
 function readData(id) {
 	//console.log('id: ', id);
 	var workbook = XLSX.readFile('./Master.xlsx');
@@ -147,7 +148,7 @@ function readData(id) {
 	return outData;
 
 }
-*/
+
 function buildResponse(session, speech, card, reprompt, end) {
     return {
         version: VERSION,
