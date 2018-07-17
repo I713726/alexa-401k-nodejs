@@ -144,7 +144,6 @@ function readData(id) {
 		if (id == row.No) {
 			//console.log('inside loop:', row.No);
       outData = row;
-      break;
 		}
 	});
 
