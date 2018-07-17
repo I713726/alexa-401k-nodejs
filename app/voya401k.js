@@ -103,7 +103,7 @@ module.exports = function(req, res) {
 					'<speak>Invalid PIN or No Account setup!</speak>',
 					{},
 					'',
-					true
+					false
 				)
 			);
 		}
