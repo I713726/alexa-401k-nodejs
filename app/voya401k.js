@@ -13,7 +13,7 @@ module.exports = function(req, res) {
 
 		res.json(
             buildResponse(
-                {},
+                {questionNo: '0'},
                 '<speak>Welcome to Voya 401k service, to get started please say the four digit PIN you setup to enabling the skill? </speak>',
                 {},
 				'<speak>to get started please say the four digit PIN you setup to enabling the skill?</speak>',
@@ -64,8 +64,7 @@ module.exports = function(req, res) {
           );
       }
 		}
-    else if (!req.body.session.attributes.hasOwnProperty('voyaPin')
-    || req.body.session.hasOwnProperty('attributes')) {
+    else if (!req.body.session.attributes.hasOwnProperty('voyaPin')) {
       res.json(
         buildResponse(
           {},
