@@ -18,8 +18,8 @@ module.exports = function(req, res) {
 
     console.log('New request for the Voya 401k:\n', req.body);
 
+    //handle launch requests
     if (req.body.request.type === 'LaunchRequest') {
-
 		res.json(
             buildResponse(
                 {questionNo: '0'},
@@ -30,6 +30,7 @@ module.exports = function(req, res) {
             )
         );
     }
+    //make sure to exit app if we get a SessionEndedRequest. Otherwise it will hang if it recieves one.
     if(req.body.request.type == 'SessionEndedRequest') {
       res.json(
           buildResponse(
@@ -40,22 +41,10 @@ module.exports = function(req, res) {
             true )
           );
     }
-/*
-    if (req.body.request.intent.name === 'VoyaPINIntent') {
-      var dataRow = readData(req.body.request.intent.slots.pin.value);
-				res.json(
-					buildResponse(
-					  {voyaPin : dataRow.No},
-            //the app breaks down when you attempt to use dataRow.FirstName in the response
-						'<speak>Hi' + dataRow.FirstName + '!! how can I help you with your monies today</speak>',
-						{},
-						'<speak>You can say, things like tell me how my account is doing? </speak>',
-						false
-					)
-				);
-  }*/
-	if (req.body.request.type === 'IntentRequest' ) {
 
+  //Handle all types of intent requests in a massive nested if statement
+	if (req.body.request.type === 'IntentRequest' ) {
+    //handles the setting of the user's PIN in the session data
 		if (req.body.request.intent.name === 'VoyaPINIntent') {
 			var dataRow = readData(req.body.request.intent.slots.pin.value);
 			if (dataRow) {
@@ -82,7 +71,9 @@ module.exports = function(req, res) {
             false )
           );
       }
-    }else if(req.body.request.intent.name === 'VoyaQuitIntent') {
+    }
+    //Next thing to check for is if the user is trying to quit, and if so let them
+    else if(req.body.request.intent.name === 'VoyaQuitIntent') {
       res.json(
           buildResponse(
             {},
@@ -91,7 +82,10 @@ module.exports = function(req, res) {
             '',
             true )
           );
-    }else if (req.body.request.intent.name === 'VoyaNoIntent') {
+    }
+    //If the user is answering no, depending on what question we are on, the result
+    //should be different.
+    else if (req.body.request.intent.name === 'VoyaNoIntent') {
       var dataRow = readData(req.body.session.attributes.voyaPin);
       var question = req.body.session.attributes.questionNo;
       if(question == 0) {
@@ -135,13 +129,13 @@ module.exports = function(req, res) {
               true )
             );
       }
-    } else if (req.body.request.intent.name === 'VoyaYesIntent') {
+    }
+    //Handle a yes answer based on the question number.
+    else if (req.body.request.intent.name === 'VoyaYesIntent') {
       var question = req.body.session.attributes.questionNo;
       if(question == '0') {
         res.json(
           buildResponse(
-            //maybe we should calculate these values instead of pulling them
-            //from the spreadsheet
             {questionNo: '0'},
             '<speak>OK, just say the PIN</speak>',
             {},
@@ -170,8 +164,6 @@ module.exports = function(req, res) {
       else if(question === '2' || question === '3') {
         res.json(
           buildResponse(
-            //maybe we should calculate these values instead of pulling them
-            //from the spreadsheet
             {voyaPin : dataRow.No},
             '<speak>OK, great. I\'ve done that for you. Congratulations,' +
             ' your future self will thank you!</speak>',
@@ -191,6 +183,9 @@ module.exports = function(req, res) {
       );
       }
     }
+    //Check to see if the pin is uninitialized. If the pin is uninitialized, all
+    //of the previously checked intents should still be interpreted, but anything
+    //else could be interpreted as an invalid pin.
     else if (!req.body.session.attributes.hasOwnProperty('voyaPin')) {
       res.json(
         buildResponse(
@@ -201,6 +196,7 @@ module.exports = function(req, res) {
           false )
         );
     }
+    //Handle an account inquiry, this gives an account summary.
     else if ( req.body.request.intent.name === 'VoyaHowMyAccountIntent' ) {
 			var dataRow = readData(req.body.session.attributes.voyaPin);
 				var value = new Date();
@@ -214,17 +210,19 @@ module.exports = function(req, res) {
 						false )
 					);
 
-			}  else if (req.body.request.type === 'HelpIntent') {
+			}
+      //if the user asks for help
+      else if (req.body.request.type === 'HelpIntent') {
 				res.json(
 					buildResponse(
 						{},
-						'<speak>Welcome to Voya 401k service, you can ask me in different ways like Please tell me how my account is doing?</speak>',
+						'<speak>Welcome to Voya 401k service, you can ask me different things, like Please tell me how my account is doing?</speak>',
 						{},
 						'',
 						false
 					)
 				);
-
+        //basically the same thing as the VoyaQuitIntent
 			} else if (req.body.request.type === 'StopIntent' || req.body.request.type === 'CancelIntent') {
 				res.json(
 					buildResponse(
@@ -238,37 +236,9 @@ module.exports = function(req, res) {
       }
     }
   }
-        //this else seems to have no point
-        /*
-			} else {
-				res.json(
-					buildResponse(
-						{},
-						'<speak>Ok, thank you for using Voya 401k service, have a nice day!</speak>',
-						{},
-						'',
-						true )
-				);
-			}
-		}
-    else {
-			res.json(
-				buildResponse(
-					{},
-					'<speak>Invalid PIN or No Account setup!</speak>',
-					{},
-					'',
-					false
-				)
-			);
-		} */
-/*     else {
-        console.error('Intent not implemented: ', req.body);
-        res.status(504).json({ message: 'Intent Not Implemented' });
-    }
-}
-*/
 
+
+//This function reads data from the spreadsheet
 function readData(id) {
 	//console.log('id: ', id);
 	var workbook = XLSX.readFile('./Master.xlsx');
@@ -288,6 +258,7 @@ function readData(id) {
 
 }
 
+//builds a JSON response based on the given parameters.
 function buildResponse(session, speech, card, reprompt, end) {
     return {
         version: VERSION,
