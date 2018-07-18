@@ -82,7 +82,8 @@ module.exports = function(req, res) {
             false )
           );
       }
-		} else if (req.body.request.intent.name === 'VoyaNoIntent') {
+     else if (req.body.request.intent.name === 'VoyaNoIntent'
+              || req.body.request.intent.name === 'VoyaQuitIntent') {
       var dataRow = readData(req.body.session.attributes.voyaPin);
       var question = req.body.session.attributes.questionNo;
       if(question == 0) {
