@@ -56,7 +56,7 @@ module.exports = function(req, res) {
       else {
         res.json(
           buildResponse(
-            { questionNo: '1'},
+            { questionNo: '0'},
             '<speak>Sorry, that\'s not a valid pin</speak>',
             {},
             '',
@@ -64,7 +64,8 @@ module.exports = function(req, res) {
           );
       }
 		}
-    else if (!req.body.session.attributes.hasOwnProperty('voyaPin')) {
+    else if (!req.body.session.attributes.hasOwnProperty('voyaPin')
+    || req.body.session.hasOwnProperty('attributes')) {
       res.json(
         buildResponse(
           {},
