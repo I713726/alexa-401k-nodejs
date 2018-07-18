@@ -75,6 +75,16 @@ module.exports = function(req, res) {
 		}else if (req.body.request.intent.name === 'VoyaNoIntent') {
       var dataRow = readData(req.body.session.attributes.voyaPin);
       var question = req.body.session.attributes.questionNo;
+      if(question == 0) {
+        res.json(
+            buildResponse(
+              {},
+              '<speak>Ok, have a nice day!</speak>',
+              {},
+              '',
+              true )
+            );
+      }
       if(question === '1') {
         res.json(
             buildResponse(
