@@ -52,7 +52,8 @@ module.exports = function(req, res) {
 				var currentTime = new Date();
 				var hrs = currentTime.getHours();
 				res.json(
-					buildResponse(
+          //TODO: REMEMBER THIS IS HERE
+					buildTestNotification(
 						{voyaPin : dataRow.No},
 						'<speak>Hi '+dataRow.FirstName+', '+greet+'!! how can I help you with your ' +dataRow.PlanName+ ' today</speak>',
 						{},
@@ -268,6 +269,42 @@ function buildResponse(session, speech, card, reprompt, end) {
                 type: 'SSML',
                 ssml: speech
             },
+			reprompt : {
+				outputSpeech: {
+					type: 'SSML',
+					ssml: reprompt
+				}
+			},
+            //card: card,
+            shouldEndSession: !!end
+        }
+    };
+}
+
+function buildTestNotification(session, speech, card, reprompt, end) {
+    return {
+        version: VERSION,
+        sessionAttributes: session,
+        response: {
+            outputSpeech: {
+                type: 'SSML',
+                ssml: speech
+            },
+            directive: {
+                header: {
+                    namespace: Notifications,
+                    name: SetIndicator,
+                    messageId: {{STRING}}
+                },
+                payload: {
+                    persistVisualIndicator: {{BOOLEAN}},
+                    playAudioIndicator: {{BOOLEAN}},
+                    asset: {
+                        assetId: {{STRING}},
+                        url: {{STRING}}
+                          }
+                        }
+                      }
 			reprompt : {
 				outputSpeech: {
 					type: 'SSML',
