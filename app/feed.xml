@@ -2,24 +2,22 @@
 <rss version="2.0">
     <channel>
         <title>Armen's RSS Feed</title>
-          <link></link>
+          <link>https://www.theonion.com</link>
           <description>Random bits of text</description>
           <language>en-us</language>
           <image>
-              <title>Feed Image</title>
-              <link></link>
+              <title>Armen's RSS Feed</title>
+              <link>https://www.theonion.com</link>
               <url>https://cdn4.iconfinder.com/data/icons/proglyphs-free/512/Invader_1-512.png</url>
-              <width>512</width>
-              <height>512</height>
+              <width>144</width>
+              <height>144</height>
           </image>
 
     <item>
         <title>Facebook apologizes for giving Mark Zuckerberg a platform</title>
-        <pubDate>Thurs, 19 Jul</pubDate>
+        <pubDate>Thurs, 19 Jul 2018 15:03:00 EST</pubDate>
         <link>https://www.theonion.com/facebook-apologizes-for-giving-mark-zuckerberg-a-platfo-1827720881</link>
-        <description><![CDATA[Visit this <a href="theonion.com">link</a> to the onion!]]></description>
-        <author>The onion</author>
-        <comments>Totally true news</comments>
+        <description><![CDATA[Visit this <a href="http://www.theonion.com">link</a> to the onion!]]></description>
         <category>Satire</category>
     </item>
   </channel>
