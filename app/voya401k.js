@@ -294,17 +294,19 @@ function buildTestNotification(session, speech, card, reprompt, end) {
                 header: {
                     namespace: Notifications,
                     name: SetIndicator,
-                    messageId: {{STRING}}
+                    messageId: 'test'
                 },
                 payload: {
-                    persistVisualIndicator: {{BOOLEAN}},
-                    playAudioIndicator: {{BOOLEAN}},
+                    persistVisualIndicator: true,
+                    playAudioIndicator: false
+                    /*
                     asset: {
                         assetId: {{STRING}},
                         url: {{STRING}}
                           }
                         }
                       }
+                      */
 			reprompt : {
 				outputSpeech: {
 					type: 'SSML',
