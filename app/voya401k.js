@@ -282,40 +282,37 @@ function buildResponse(session, speech, card, reprompt, end) {
 }
 
 function buildTestNotification(session, speech, card, reprompt, end) {
-    return {
-        version: VERSION,
-        sessionAttributes: session,
-        response: {
-            outputSpeech: {
-                type: 'SSML',
-                ssml: speech
-            },
-            directive: {
-                header: {
-                    namespace: Notifications,
-                    name: SetIndicator,
-                    messageId: 'test'
-                },
-                payload: {
-                    persistVisualIndicator: true,
-                    playAudioIndicator: false
-                    /*
-                    asset: {
-                        assetId: {{STRING}},
-                        url: {{STRING}}
-                          }
-                        }
-                        */
-                      },
-
-			reprompt : {
-				outputSpeech: {
-					type: 'SSML',
-					ssml: reprompt
-				}
-			},
-            //card: card,
-            shouldEndSession: !!end
+  return {
+      version: VERSION,
+      sessionAttributes: session,
+      response: {
+          outputSpeech: {
+              type: 'SSML',
+              ssml: speech
+          },
+    reprompt : {
+      outputSpeech: {
+        type: 'SSML',
+        ssml: reprompt
+      }
+    },
+    directive: {
+        header: {
+            namespace: Notifications,
+            name: SetIndicator,
+            messageId: 'testNotification'
+        },
+        payload: {
+            persistVisualIndicator: true,
+            playAudioIndicator: false,
+            asset: {
+                assetId: null,
+                url: null
+            }
         }
-    };
+    }
+          //card: card,
+          shouldEndSession: !!end
+      }
+  };
 }
