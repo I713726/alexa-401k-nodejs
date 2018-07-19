@@ -306,7 +306,7 @@ function buildTestNotification(session, speech, card, reprompt, end) {
                           }
                         }
                         */
-                      }
+                      },
 
 			reprompt : {
 				outputSpeech: {
