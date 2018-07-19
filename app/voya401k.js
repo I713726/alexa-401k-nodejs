@@ -310,7 +310,7 @@ function buildTestNotification(session, speech, card, reprompt, end) {
                 url: null
             }
         }
-    }
+    },
           //card: card,
           shouldEndSession: !!end
       }
