@@ -298,8 +298,8 @@ function buildTestNotification(session, speech, card, reprompt, end) {
     },
     directive: {
         header: {
-            namespace: Notifications,
-            name: SetIndicator,
+            namespace: 'Notifications',
+            name: 'SetIndicator',
             messageId: 'testNotification'
         },
         payload: {
@@ -316,3 +316,4 @@ function buildTestNotification(session, speech, card, reprompt, end) {
       }
   };
 }
+  
