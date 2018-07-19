@@ -305,8 +305,9 @@ function buildTestNotification(session, speech, card, reprompt, end) {
                         url: {{STRING}}
                           }
                         }
+                        */
                       }
-                      */
+
 			reprompt : {
 				outputSpeech: {
 					type: 'SSML',
