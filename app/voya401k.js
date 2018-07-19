@@ -52,8 +52,7 @@ module.exports = function(req, res) {
 				var currentTime = new Date();
 				var hrs = currentTime.getHours();
 				res.json(
-          //TODO: REMEMBER THIS IS HERE
-					buildTestNotification(
+					buildResponse(
 						{voyaPin : dataRow.No},
 						'<speak>Hi '+dataRow.FirstName+', '+greet+'!! how can I help you with your ' +dataRow.PlanName+ ' today</speak>',
 						{},
@@ -316,4 +315,3 @@ function buildTestNotification(session, speech, card, reprompt, end) {
       }
   };
 }
-  
