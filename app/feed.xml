@@ -21,6 +21,6 @@
         <author>The onion</author>
         <comments>Totally true news</comments>
         <category>Satire</category>
-
-    </channel>
-    </rss>
+    </item>
+  </channel>
+</rss>
